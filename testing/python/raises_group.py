@@ -1368,3 +1368,11 @@ def test_expected_matching_only_on_matching() -> None:
         RaisesGroup(TypeError, ValueError, TypeError),
     ):
         raise ExceptionGroup("", [TypeError()])
+
+
+def test_invalid_match_pattern() -> None:
+    with pytest.raises(Failed, match="Invalid regex pattern provided to 'match'"):
+        RaisesExc(ValueError, match="[")
+
+    with pytest.raises(Failed, match="Invalid regex pattern provided to 'match'"):
+        RaisesGroup(ValueError, match="[")
